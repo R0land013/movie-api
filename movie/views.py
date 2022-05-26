@@ -30,3 +30,17 @@ class MovieViewSet(viewsets.ModelViewSet):
         serializer = MovieSerializer(data=movies_by_actor, many=True)
         serializer.is_valid()
         return Response(data=serializer.data)
+
+    @action(detail=False, methods=['GET'], url_path='year')
+    def get_movies_by_year_range(self, request):
+        filtered_movies = self.queryset.all()
+        if 'minimumYear' in request.data:
+            minimum_year = request.data['minimumYear']
+            filtered_movies = self.queryset.filter(year__gte=minimum_year)
+        if 'maximumYear' in request.data:
+            maximum_year = request.data['maximumYear']
+            filtered_movies = filtered_movies.filter(year__lte=maximum_year)
+
+        serializer = MovieSerializer(data=filtered_movies, many=True)
+        serializer.is_valid()
+        return Response(data=serializer.data)
