@@ -44,3 +44,12 @@ class MovieViewSet(viewsets.ModelViewSet):
         serializer = MovieSerializer(data=filtered_movies, many=True)
         serializer.is_valid()
         return Response(data=serializer.data)
+
+    @action(detail=False, methods=['GET'], url_path='director')
+    def get_movies_by_director(self, request):
+        director = request.data['director']
+
+        movies_by_director = self.queryset.filter(director__icontains=director)
+        serializer = MovieSerializer(data=movies_by_director, many=True)
+        serializer.is_valid()
+        return Response(data=serializer.data)
