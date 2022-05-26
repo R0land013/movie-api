@@ -21,3 +21,12 @@ class MovieViewSet(viewsets.ModelViewSet):
         serializer = MovieSerializer(data=movies_by_country, many=True)
         serializer.is_valid()
         return Response(data=serializer.data)
+
+    @action(detail=False, methods=['GET'], url_path='by_actor')
+    def get_movies_by_actor(self, request):
+        actor = request.data['actor']
+
+        movies_by_actor = self.queryset.filter(staff__staff__icontains=actor)
+        serializer = MovieSerializer(data=movies_by_actor, many=True)
+        serializer.is_valid()
+        return Response(data=serializer.data)
