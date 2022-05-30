@@ -22,3 +22,9 @@ def get_data_from_GET_request(url: str, data: dict):
     stream = io.BytesIO(response.content)
     retrieved_data = JSONParser().parse(stream)
     return retrieved_data
+
+
+def get_status_code_from_GET_request(url: str, data: dict):
+    request_data = json.dumps(data)
+    response = Client().generic('GET', url, request_data, 'application/json')
+    return response.status_code
