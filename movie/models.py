@@ -4,17 +4,17 @@ from django.db import models
 class Movie(models.Model):
 
     GENRES = (
-        ('Acc', 'Acción'),
-        ('CicFic', 'Ciencia ficción'),
-        ('Com', 'Comedia'),
-        ('Dram', 'Drama'),
-        ('Fan', 'Fantasía'),
-        ('MelDram', 'Melodrama'),
-        ('Mus', 'Musical'),
-        ('Rom', 'Romance'),
-        ('Susp', 'Suspenso'),
-        ('Terr', 'Terror'),
-        ('Doc', 'Documental'),
+        ('Acción', 'Acción'),
+        ('Ciencia ficción', 'Ciencia ficción'),
+        ('Comedia', 'Comedia'),
+        ('Drama', 'Drama'),
+        ('Fantasía', 'Fantasía'),
+        ('Melodrama', 'Melodrama'),
+        ('Musical', 'Musical'),
+        ('Romance', 'Romance'),
+        ('Suspenso', 'Suspenso'),
+        ('Terror', 'Terror'),
+        ('Documental', 'Documental'),
     )
 
     name = models.CharField(max_length=150)
