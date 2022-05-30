@@ -16,7 +16,7 @@ def delete_all_movies_from_database():
         a_movie.delete()
 
 
-def get_request_using_json(url: str, data: dict):
+def GET_request_using_json(url: str, data: dict):
     request_data = json.dumps(data)
     response = Client().generic('GET', url, request_data, 'application/json')
     stream = io.BytesIO(response.content)
