@@ -1,10 +1,10 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-
 from movie.models import Movie
 from movie.serializers import MovieSerializer
 from rest_framework.decorators import action
+from rest_framework.status import HTTP_400_BAD_REQUEST
 
 
 class MovieViewSet(viewsets.ModelViewSet):
@@ -24,6 +24,10 @@ class MovieViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['GET'], url_path='by_actor')
     def get_movies_by_actor(self, request):
+
+        if 'actor' not in request.data:
+            return Response(status=HTTP_400_BAD_REQUEST)
+
         actor = request.data['actor']
 
         movies_by_actor = self.queryset.filter(staff__staff__icontains=actor)
