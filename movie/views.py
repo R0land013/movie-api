@@ -15,6 +15,9 @@ class MovieViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['GET'], url_path='by_country')
     def get_movies_by_country(self, request):
+        if 'country' not in request.data:
+            return Response(status=HTTP_400_BAD_REQUEST)
+
         country = request.data['country']
 
         movies_by_country = self.queryset.filter(country=country)
