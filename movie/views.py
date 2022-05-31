@@ -40,6 +40,9 @@ class MovieViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['GET'], url_path='year')
     def get_movies_by_year_range(self, request):
+        if 'minimumYear' not in request.data or 'maximumYear' not in request.data:
+            return Response(status=HTTP_400_BAD_REQUEST)
+
         filtered_movies = self.queryset.all()
         if 'minimumYear' in request.data:
             minimum_year = request.data['minimumYear']
