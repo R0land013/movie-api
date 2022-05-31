@@ -19,7 +19,7 @@ class TestGetMoviesByCountry(APITestCase):
         m3.country = 'Cuba'
         save_movies_into_database(movies)
 
-        response_data = get_data_from_GET_request('/movie/by_country/', {'country': 'Cuba'})
+        response_data = get_data_from_GET_request('/movie/country/', {'country': 'Cuba'})
 
         movie_serializer = MovieSerializer(data=[m1, m3], many=True)
         movie_serializer.is_valid()
@@ -33,7 +33,7 @@ class TestGetMoviesByCountry(APITestCase):
         m3.country = 'Cuba'
         save_movies_into_database(movies)
 
-        response_status = get_status_code_from_GET_request('/movie/by_country/',
+        response_status = get_status_code_from_GET_request('/movie/country/',
                                                            {'countries': 'Cuba'})
 
         self.assertEqual(response_status, HTTP_400_BAD_REQUEST)

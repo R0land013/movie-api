@@ -13,7 +13,7 @@ class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
     permission_classes = [AllowAny]
 
-    @action(detail=False, methods=['GET'], url_path='by_country')
+    @action(detail=False, methods=['GET'], url_path='country')
     def get_movies_by_country(self, request):
         if 'country' not in request.data:
             return Response(status=HTTP_400_BAD_REQUEST)
@@ -25,7 +25,7 @@ class MovieViewSet(viewsets.ModelViewSet):
         serializer.is_valid()
         return Response(data=serializer.data)
 
-    @action(detail=False, methods=['GET'], url_path='by_actor')
+    @action(detail=False, methods=['GET'], url_path='actor')
     def get_movies_by_actor(self, request):
 
         if 'actor' not in request.data:

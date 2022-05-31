@@ -19,7 +19,7 @@ class TestGetMoviesByActor(TestCase):
         m3.staff = {'staff': ['Tom Hanks', 'Jorge Perrugorría']}
         save_movies_into_database(movies)
 
-        response_data = get_data_from_GET_request('/movie/by_actor/', {'actor': 'Tom Hanks'})
+        response_data = get_data_from_GET_request('/movie/actor/', {'actor': 'Tom Hanks'})
 
         movie_serializer = MovieSerializer(data=[m1, m3], many=True)
         movie_serializer.is_valid()
@@ -33,7 +33,7 @@ class TestGetMoviesByActor(TestCase):
         m3.staff = {'staff': ['Tom Hanks', 'Jorge Perrugorría']}
         save_movies_into_database(movies)
 
-        response_status = get_status_code_from_GET_request('/movie/by_actor/',
+        response_status = get_status_code_from_GET_request('/movie/actor/',
                                                            {'actress': 'Emma Watson'})
 
         self.assertEqual(response_status, HTTP_400_BAD_REQUEST)
