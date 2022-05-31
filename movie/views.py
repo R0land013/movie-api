@@ -54,6 +54,9 @@ class MovieViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['GET'], url_path='director')
     def get_movies_by_director(self, request):
+        if 'director' not in request.data:
+            return Response(status=HTTP_400_BAD_REQUEST)
+
         director = request.data['director']
 
         movies_by_director = self.queryset.filter(director__icontains=director)
