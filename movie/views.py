@@ -66,6 +66,8 @@ class MovieViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['GET'], url_path='genre')
     def get_movies_by_genre(self, request):
+        if 'genre' not in request.data:
+            return Response(status=HTTP_400_BAD_REQUEST)
         genre = request.data['genre']
 
         movies_by_genre = self.queryset.filter(genre=genre)
