@@ -21,6 +21,10 @@ python manage.py makemigrations
 python manage.py migrate
 ````
 
+**Iniciar el servidor Django**
+````shell script
+python manage.py runserver
+````
 
 ### Ejecutar los tests
 
